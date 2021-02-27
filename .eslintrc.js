@@ -11,6 +11,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'class-methods-use-this': 'off',
     'import/no-unresolved': [2, { ignore: ['.png$', '.webp$', '.jpg$'] }],
   },
 };

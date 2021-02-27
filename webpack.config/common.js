@@ -1,12 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-const Dotenv = require('dotenv-webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const path = require('path');
-const { appTitle } = require('../src/configs/app');
+const appJson = require('../src/assets/app.json');
 
 const srcPath = path.resolve(__dirname, '..', 'src');
 
@@ -22,13 +21,12 @@ module.exports = {
   },
 
   plugins: [
-    new Dotenv(),
     new ESLintPlugin(),
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
     new HtmlWebPackPlugin({
-      title: appTitle,
+      title: appJson.pageTitle,
     }),
   ],
 
@@ -48,11 +46,12 @@ module.exports = {
           },
         },
         include: srcPath,
+        exclude: /node_modules/,
         test: /\.m?js$/,
       },
 
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|wav|mp3|json)$/i,
         include: srcPath,
         type: 'asset/resource',
       },

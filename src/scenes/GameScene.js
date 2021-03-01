@@ -6,34 +6,30 @@ import BombSpawner from '../entities/BombSpawner';
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');
-
-    this.player = undefined;
-    this.cursors = undefined;
-    this.scoreLabel = undefined;
-    this.stars = undefined;
-    this.bombSpawner = undefined;
-
-    this.gameOver = false;
   }
 
   create() {
+    this.player = null;
+    this.cursors = null;
+    this.platforms = null;
+    this.scoreLabel = null;
+    this.stars = null;
+    this.bombSpawner = null;
+    this.bombsGroup = null;
+
+    this.gameOver = false;
+
     this.add.image(400, 300, keys.sky);
-    const platforms = this.createPlatforms();
+    this.platforms = this.createPlatforms();
     this.player = this.createPlayer();
     this.stars = this.createStars();
-
     this.scoreLabel = this.createScoreLabel(16, 16, 0);
     this.bombSpawner = new BombSpawner(this, keys.bomb);
-    const bombsGroup = this.bombSpawner.group;
-
-    this.physics.add.collider(this.player, platforms);
-    this.physics.add.collider(this.stars, platforms);
-    this.physics.add.collider(bombsGroup, platforms);
-    this.physics.add.collider(this.player, bombsGroup, this.hitBomb, null, this);
-
-    this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
-
+    this.bombsGroup = this.bombSpawner.group;
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.collisionDefs();
+
+    this.input.keyboard.on('keydown-SPACE', this.restart, this);
   }
 
   update() {
@@ -51,13 +47,26 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.play('right', true);
     } else {
       this.player.setVelocityX(0);
-
       this.player.anims.play('turn');
     }
 
     if (this.cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-330);
     }
+  }
+
+  collisionDefs() {
+    this.physics.add.collider(this.player, this.platforms);
+    this.physics.add.collider(this.stars, this.platforms);
+    this.physics.add.collider(this.bombsGroup, this.platforms);
+
+    this.physics.add.collider(
+      this.player, this.bombsGroup, this.hitBomb, null, this,
+    );
+
+    this.physics.add.overlap(
+      this.player, this.stars, this.collectStar, null, this,
+    );
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -69,6 +78,12 @@ export default class GameScene extends Phaser.Scene {
     player.anims.play('turn');
 
     this.gameOver = true;
+  }
+
+  restart() {
+    if (this.gameOver) {
+      this.scene.start('PreloadScene');
+    }
   }
 
   collectStar(player, star) {

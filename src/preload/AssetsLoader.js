@@ -1,4 +1,4 @@
-import { KEY, SOUND } from '../core/Consts';
+import { KEY } from '../core/Consts';
 
 import bomb from './assets/bomb.png';
 import dude from './assets/dude.png';
@@ -22,6 +22,6 @@ export default class AssetsLoader {
       },
     );
 
-    scene.load.audio(SOUND.ambianceWind, ambianceWind);
+    scene.load.audio(KEY.ambianceWind, ambianceWind);
   }
 }

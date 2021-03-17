@@ -1,1 +1,1 @@
-[Play it](https://josethomazini.github.io/falling_stars/dist/index.html)
+[Play it](https://josethomazini.github.io/falling_stars/)

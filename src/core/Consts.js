@@ -4,6 +4,7 @@ export const KEY = {
   star: 'star',
   bomb: 'bomb',
   dude: 'dude',
+  ambianceWind: 'ambianceWind',
 };
 
 export const DUDE_ANIM = {
@@ -15,8 +16,4 @@ export const DUDE_ANIM = {
 export const SCENE = {
   preload: 'preload',
   stage: 'scene',
-};
-
-export const SOUND = {
-  ambianceWind: 'ambianceWind',
 };

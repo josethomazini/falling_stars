@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     // 'no-console': 'off',
+    'no-new': 'off',
     'class-methods-use-this': 'off',
     'import/no-unresolved': [2, { ignore: ['.png$', '.webp$', '.jpg$'] }],
   },

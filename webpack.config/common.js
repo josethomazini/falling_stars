@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const path = require('path');
-const appJson = require('../src/assets/app.json');
+const appJson = require('../src/app.json');
 
 const srcPath = path.resolve(__dirname, '..', 'src');
 

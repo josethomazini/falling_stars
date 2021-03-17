@@ -1,8 +1,9 @@
-import './assets/style.css';
 import Phaser from 'phaser';
 
-import PreloadScene from './scenes/PreloadScene';
-import GameScene from './scenes/GameScene';
+import './style.css';
+
+import PreloadScene from './preload/PreloadScene';
+import StageScene from './stage/StageScene';
 
 const config = {
   type: Phaser.CANVAS,
@@ -19,7 +20,7 @@ const config = {
   },
   scene: [
     PreloadScene,
-    GameScene,
+    StageScene,
   ],
 };
 

@@ -9,16 +9,21 @@ import PlatformGroup from './PlatformGroup';
 import PlayerControl from './PlayerControl';
 import ScoreLabel from './ScoreLabel';
 import StarGroup from './StarGroup';
+import { SCENE } from '../core/Consts';
+import BackgroundSound from './BackgroundSound';
 
 export default class StageScene extends Phaser.Scene {
   constructor() {
-    super('StageScene');
+    super(SCENE.stage);
   }
 
   create() {
     GameState.gameOver = false;
 
     new Background(this);
+
+    const backgroundSound = new BackgroundSound(this);
+    backgroundSound.play();
 
     const dude = new Dude(this);
     const platforms = new PlatformGroup(this);

@@ -2,10 +2,11 @@ import Phaser from 'phaser';
 
 import AssetsLoader from './AssetsLoader';
 import EventHandler from './EventHandler';
+import { SCENE } from '../core/Consts';
 
 export default class PreloadScene extends Phaser.Scene {
   constructor() {
-    super('PreloadScene');
+    super(SCENE.preload);
   }
 
   preload() {
@@ -14,6 +15,6 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('StageScene');
+    this.scene.start(SCENE.stage);
   }
 }

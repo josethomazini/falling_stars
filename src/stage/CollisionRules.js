@@ -1,5 +1,5 @@
 import GameState from '../core/GameState';
-import { anims } from '../core/Consts';
+import { DUDE_ANIM } from '../core/Consts';
 
 export default class CollisionRules {
   constructor(scene, dude, platforms, stars, bombSpawner, scoreLabel) {
@@ -13,26 +13,37 @@ export default class CollisionRules {
     this.scene.physics.add.collider(bombSpawner.group, platforms.group);
 
     this.scene.physics.add.collider(
-      dude, this.bombSpawner.group, this.hitBomb, null, this,
+      dude, this.bombSpawner.group,
+      this.dudeHitsBomb, null, this,
     );
 
     this.scene.physics.add.overlap(
-      dude, stars.group, this.collectStar, null, this,
+      dude, stars.group,
+      this.dudeCollectsStar, null, this,
+    );
+
+    this.scene.physics.add.collider(
+      this.bombSpawner.group, this.bombSpawner.group,
+      this.bombHitsBomb, null, this,
     );
   }
 
   // eslint-disable-next-line no-unused-vars
-  hitBomb(player, bomb) {
+  dudeHitsBomb(player, bomb) {
     this.scene.physics.pause();
 
     player.setTint(0xff0000);
-
-    player.anims.play(anims.idle);
+    player.anims.play(DUDE_ANIM.idle);
 
     GameState.gameOver = true;
   }
 
-  collectStar(player, star) {
+  bombHitsBomb(bomb1, bomb2) {
+    bomb1.disableBody(true, true);
+    bomb2.disableBody(true, true);
+  }
+
+  dudeCollectsStar(player, star) {
     star.disableBody(true, true);
     this.scoreLabel.add(10);
 

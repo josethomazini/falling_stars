@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { keys } from '../core/Consts';
+import { KEY } from '../core/Consts';
 
 export default class BombSpawner {
   constructor(scene) {
@@ -12,7 +12,7 @@ export default class BombSpawner {
       ? Phaser.Math.Between(400, 800)
       : Phaser.Math.Between(0, 400);
 
-    const bomb = this.group.create(x, 16, keys.bomb);
+    const bomb = this.group.create(x, 16, KEY.bomb);
     bomb.setBounce(1);
     bomb.setCollideWorldBounds(true);
     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);

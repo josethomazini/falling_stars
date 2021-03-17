@@ -1,24 +1,27 @@
-import { keys } from '../core/Consts';
+import { KEY, SOUND } from '../core/Consts';
 
-import sky from './assets/sky.png';
-import platform from './assets/platform.png';
-import star from './assets/star.png';
 import bomb from './assets/bomb.png';
 import dude from './assets/dude.png';
+import platform from './assets/platform.png';
+import sky from './assets/sky.png';
+import star from './assets/star.png';
+import ambianceWind from './assets/ambiance-wind-forest-calm-loop.wav';
 
 export default class AssetsLoader {
   constructor(scene) {
-    scene.load.image(keys.sky, sky);
-    scene.load.image(keys.platform, platform);
-    scene.load.image(keys.star, star);
-    scene.load.image(keys.bomb, bomb);
+    scene.load.image(KEY.sky, sky);
+    scene.load.image(KEY.platform, platform);
+    scene.load.image(KEY.star, star);
+    scene.load.image(KEY.bomb, bomb);
 
     scene.load.spritesheet(
-      keys.dude, dude,
+      KEY.dude, dude,
       {
         frameWidth: 32,
         frameHeight: 48,
       },
     );
+
+    scene.load.audio(SOUND.ambianceWind, ambianceWind);
   }
 }

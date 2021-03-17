@@ -1,5 +1,5 @@
 import GameState from '../core/GameState';
-import { anims } from '../core/Consts';
+import { DUDE_ANIM, SCENE } from '../core/Consts';
 
 export default class PlayerControl {
   constructor(scene, dude) {
@@ -25,18 +25,18 @@ export default class PlayerControl {
 
   restart() {
     if (GameState.gameOver) {
-      this.scene.scene.start('StageScene');
+      this.scene.scene.start(SCENE.stage);
     }
   }
 
   moveLeft() {
     this.dude.setVelocityX(-160);
-    this.dude.anims.play(anims.left, true);
+    this.dude.anims.play(DUDE_ANIM.left, true);
   }
 
   moveRight() {
     this.dude.setVelocityX(160);
-    this.dude.anims.play(anims.right, true);
+    this.dude.anims.play(DUDE_ANIM.right, true);
   }
 
   jump() {
@@ -45,6 +45,6 @@ export default class PlayerControl {
 
   idle() {
     this.dude.setVelocityX(0);
-    this.dude.anims.play(anims.idle);
+    this.dude.anims.play(DUDE_ANIM.idle);
   }
 }

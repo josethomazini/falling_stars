@@ -14,6 +14,6 @@ module.exports = {
     // 'no-console': 'off',
     'no-new': 'off',
     'class-methods-use-this': 'off',
-    'import/no-unresolved': [2, { ignore: ['.png$', '.webp$', '.jpg$'] }],
+    'import/no-unresolved': [2, { ignore: ['.wav$', '.png$', '.webp$', '.jpg$'] }],
   },
 };

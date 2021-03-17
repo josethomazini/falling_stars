@@ -1,4 +1,4 @@
-export const keys = {
+export const KEY = {
   sky: 'sky',
   platform: 'platform',
   star: 'star',
@@ -6,8 +6,17 @@ export const keys = {
   dude: 'dude',
 };
 
-export const anims = {
+export const DUDE_ANIM = {
   left: 'left',
   right: 'right',
   idle: 'idle',
+};
+
+export const SCENE = {
+  preload: 'preload',
+  stage: 'scene',
+};
+
+export const SOUND = {
+  ambianceWind: 'ambianceWind',
 };

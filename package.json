@@ -2,9 +2,10 @@
   "scripts": {
     "dev": "webpack serve --config webpack.config/dev.js --open",
     "lint_fix": "eslint ./src --fix",
-    "deploy": "npm-run-all lint_fix _build _ghpages",
+    "deploy": "npm-run-all lint_fix _build_version _build _ghpages",
     "_build": "webpack --config webpack.config/prod.js",
-    "_ghpages": "gh-pages -d dist -f"
+    "_ghpages": "gh-pages -d dist -f",
+    "_build_version": "node src/BuildVersion.js"
   },
   "private": true,
   "dependencies": {

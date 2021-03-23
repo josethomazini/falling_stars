@@ -2,8 +2,8 @@ import Phaser from 'phaser';
 
 import './style.css';
 
-import PreloadScene from './preload/PreloadScene';
-import StageScene from './stage/StageScene';
+import PreloadScene from './preload';
+import StageScene from './stage';
 
 const config = {
   type: Phaser.CANVAS,

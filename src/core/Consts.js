@@ -4,13 +4,11 @@ export const KEY = {
   star: 'star',
   bomb: 'bomb',
   dude: 'dude',
-  ambianceWind: 'ambianceWind',
-};
-
-export const DUDE_ANIM = {
-  left: 'left',
-  right: 'right',
-  idle: 'idle',
+  epicBattle: 'epicBattle',
+  bombExplode: 'bombExplode',
+  deathScream: 'deathScream',
+  jump: 'jump',
+  collectCoin: 'collectCoin',
 };
 
 export const SCENE = {

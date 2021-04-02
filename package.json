@@ -7,6 +7,14 @@
     "_ghpages": "gh-pages -d dist -f",
     "_build_version": "node src/BuildVersion.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": ["lint_fix", "git add"]
+  },
   "private": true,
   "dependencies": {
     "phaser": "^3.52.0"
@@ -23,6 +31,8 @@
     "eslint-webpack-plugin": "^2.5.2",
     "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^5.2.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "npm-run-all": "^4.1.5",
     "style-loader": "^2.0.0",
     "webpack": "^5.24.0",

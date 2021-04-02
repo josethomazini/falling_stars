@@ -11,8 +11,9 @@ import PlayerControl from './rules/PlayerControl';
 import ScoreLabel from './entities/score/ScoreLabel';
 import StarGroup from './entities/StarGroup';
 import State from './rules/State';
-import soundManagerFactory from './audio';
+import SoundManager from './SoundManager';
 import { SCENE } from '../core/Consts';
+import GameOverMessage from './entities/GameOverMessage';
 
 export default class StageScene extends Phaser.Scene {
   constructor() {
@@ -22,7 +23,7 @@ export default class StageScene extends Phaser.Scene {
   create() {
     State.gameOver = false;
 
-    const soundManager = soundManagerFactory(this);
+    const soundManager = SoundManager(this);
     new Background(this);
     const dude = new Dude(this);
     const platforms = new PlatformGroup(this);
@@ -31,10 +32,12 @@ export default class StageScene extends Phaser.Scene {
     const maxScoreLabel = new MaxScoreLabel(this);
     const maxScoreManager = new MaxScoreManager(maxScoreLabel);
     const scoreLabel = new ScoreLabel(this, maxScoreManager);
+    const gameOverMessage = new GameOverMessage(this);
 
     this.playerControl = new PlayerControl(this, dude, soundManager);
     new CollisionRules(
-      this, dude, platforms, stars, bombSpawner, scoreLabel, soundManager,
+      this, dude, platforms, stars, bombSpawner,
+      scoreLabel, soundManager, gameOverMessage,
     );
   }
 

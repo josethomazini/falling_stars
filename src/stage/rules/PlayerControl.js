@@ -27,7 +27,7 @@ export default class PlayerControl {
 
   restart() {
     if (State.gameOver) {
-      this.soundManager.background.increaseVolume();
+      this.soundManager.background.setVolume(1);
       this.scene.scene.start(SCENE.stage);
     }
   }

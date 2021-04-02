@@ -3,13 +3,18 @@ import DUDE_ANIM from '../Consts';
 
 export default class CollisionRules {
   constructor(
-    scene, dude, platforms, stars, bombSpawner, scoreLabel, soundManager,
+    scene, dude, platforms, stars, bombSpawner,
+    scoreLabel, soundManager, gameOverMessage,
   ) {
     this.bombSpawner = bombSpawner;
     this.scoreLabel = scoreLabel;
     this.soundManager = soundManager;
+    this.gameOverMessage = gameOverMessage;
+
     this.stars = stars;
     this.scene = scene;
+
+    this.cursors = scene.input.keyboard.createCursorKeys();
 
     this.scene.physics.add.collider(dude, platforms.group);
     this.scene.physics.add.collider(this.stars.group, platforms.group);
@@ -32,13 +37,15 @@ export default class CollisionRules {
   }
 
   // eslint-disable-next-line no-unused-vars
-  dudeHitsBomb(player, bomb) {
+  dudeHitsBomb(dude, bomb) {
+    this.gameOverMessage.showTexts();
+
     this.soundManager.bombExplode.play();
     this.soundManager.deathScream.play();
-    this.soundManager.background.decreaseVolume();
+    this.soundManager.background.setVolume(0.5);
     this.scene.physics.pause();
 
-    player.anims.play(DUDE_ANIM.dead);
+    dude.anims.play(DUDE_ANIM.dead);
 
     State.gameOver = true;
   }
@@ -49,10 +56,23 @@ export default class CollisionRules {
     bomb2.disableBody(true, true);
   }
 
-  dudeCollectsStar(player, star) {
+  jumpOver(dude, star) {
+    const dudeY = dude.y + dude.height / 2;
+    const starY = star.y + star.height / 2;
+
+    return this.cursors.up.isDown && dudeY < starY;
+  }
+
+  dudeCollectsStar(dude, star) {
     this.soundManager.collectCoin.play();
     star.disableBody(true, true);
-    this.scoreLabel.add(10);
+
+    if (this.jumpOver(dude, star) === true) {
+      // som legal
+      this.scoreLabel.add(50);
+    } else {
+      this.scoreLabel.add(10);
+    }
 
     if (this.stars.group.countActive(true) === 0) {
       //  A new batch of stars to collect
@@ -61,6 +81,6 @@ export default class CollisionRules {
       });
     }
 
-    this.bombSpawner.spawn(player.x);
+    this.bombSpawner.spawn(dude.x);
   }
 }
